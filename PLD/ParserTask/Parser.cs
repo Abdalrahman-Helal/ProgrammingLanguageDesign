@@ -172,14 +172,16 @@ namespace com.calitha.goldparser
     {
         private LALRParser parser;
         ListBox lst;
-
-        public MyParser(string filename, ListBox lst)
+        ListBox ls;
+        public MyParser(string filename, ListBox lst , ListBox ls)
         {
             FileStream stream = new FileStream(filename,
                                                FileMode.Open, 
                                                FileAccess.Read, 
                                                FileShare.Read);
             this.lst = lst;
+            this.ls = ls;
+
             Init(stream);
             stream.Close();
         }
@@ -209,6 +211,7 @@ namespace com.calitha.goldparser
 
             parser.OnTokenError += new LALRParser.TokenErrorHandler(TokenErrorEvent);
             parser.OnParseError += new LALRParser.ParseErrorHandler(ParseErrorEvent);
+            parser.OnTokenRead += new LALRParser.TokenReadHandler(TokenReadEvent);
         }
 
         public void Parse(string source)
@@ -810,9 +813,15 @@ namespace com.calitha.goldparser
         {
             string message = "Parse error caused by token: '"+args.UnexpectedToken.ToString()+" in line: "+args.UnexpectedToken.Location.LineNr;
             lst.Items.Add(message);
-            string m2="Expected Token:"args.ExpectedTokens.ToString();
+            string m2="Expected Token:"+args.ExpectedTokens.ToString();
             lst.Items.Add(m2);
             //todo: Report message to UI?
+        }
+
+        private void TokenReadEvent(LALRParser pr ,TokenReadEventArgs args)
+        {
+            string info = args.Token.Text + "   \t \t" +(SymbolConstants )args.Token.Symbol.Id;
+            ls.Items.Add(info);
         }
 
     }

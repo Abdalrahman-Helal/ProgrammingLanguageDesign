@@ -30,6 +30,7 @@
         {
             textBox1 = new TextBox();
             listBox1 = new ListBox();
+            listBox2 = new ListBox();
             SuspendLayout();
             // 
             // textBox1
@@ -47,15 +48,25 @@
             listBox1.ItemHeight = 20;
             listBox1.Location = new Point(400, 12);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(372, 384);
+            listBox1.Size = new Size(372, 144);
             listBox1.TabIndex = 1;
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
+            // 
+            // listBox2
+            // 
+            listBox2.FormattingEnabled = true;
+            listBox2.ItemHeight = 20;
+            listBox2.Location = new Point(400, 183);
+            listBox2.Name = "listBox2";
+            listBox2.Size = new Size(372, 204);
+            listBox2.TabIndex = 2;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(listBox2);
             Controls.Add(listBox1);
             Controls.Add(textBox1);
             Name = "Form1";
@@ -68,5 +79,6 @@
 
         private TextBox textBox1;
         private ListBox listBox1;
+        private ListBox listBox2;
     }
 }
